@@ -1,0 +1,69 @@
+﻿@*UPDATE.CSHTML (PASTA ADMINWBS) - pop-up*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/EditingWBS.css">
+    <link rel="stylesheet" href="~/css/wbsList.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MVEF+ftW/ZD0fTBcOnzEFX4Ntx/Q2BH4vptXfFwGndSyHYAtaRw5KhqfDEJXv9WJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editWBSModal" tabindex="-1" aria-labelledby="editWBSModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="title" id="editWBSModalLabel">Editing WBS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your form content here -->
+                    <div class="container form-container">
+                        <!-- PRIMEIRA LINHA/ROW -->
+                        <!-- CADA LINHA CONSEGUE CARREGAR 2 DIVS -->
+                        <div class="form-row">
+                            <div class="form-column">
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" class="form-control" placeholder="Enter name">
+                            </div>
+
+                            <div class="form-column">
+                                <label for="code">Code:</label>
+                                <input type="text" id="code" class="form-control" placeholder="Wbs3879">
+                            </div>
+                        </div>
+
+                        <!-- SEGUNDA LINHA/ROW -->
+                        <div class="form-row">
+                            <div class="form-column">
+                                <label for="description">Description:</label>
+                                <textarea type="description" id="description" class="form-controlgrande" placeholder="Wbs used for day offs."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- Botão de cancelamento -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <!-- Botão para salvar alterações -->
+                    <button type="button" class="btn btn-secondary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to automatically trigger the modal when the page loads -->
+    <script>
+        window.onload = function () {
+            var editWBSModal = new bootstrap.Modal(document.getElementById('editWBSModal'));
+            editWBSModal.show();
+        };
+    </script>
+
+    <!-- Script para manipular eventos de clique -->
+    <script src="js/editWBSModal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-Qkw5YaaOKw9BDPwYXtKTu3jH6WY3xg5WlPw5rDfBquA2C2EnpTtIS7kqNQ1aJ+Xo" crossorigin="anonymous"></script>
+</body>
+</html>

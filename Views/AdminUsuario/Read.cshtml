@@ -1,0 +1,83 @@
+﻿@{
+	ViewData["Title"] = "GerenciarUsuarios";
+
+}
+
+
+<meta name="viewport" content="width-device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="~/css/GerenciarUsuarios.css">
+
+<div class="container-conteudo">
+
+	<h2 class="work-sans">Employees List</h2>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col"></th>
+				<th scope="col">Name</th>
+				<th scope="col">E-mail</th>
+				<th scope="col">Department</th>
+				<th scope="col">Type</th>
+				<th scope="col">Edit </th>
+				<th scope="col">Active</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">1</th>
+				<td>Annie Santana</td>
+				<td>annie@gmail.com</td>
+				<td>Dev</td>
+				<td>Usuário</td>
+				<td>
+					<a> <img role="button" class="mini-icons" src="~/images/pencil.svg" /> </a>
+				</td>
+				<td>
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>Bianca Uno</td>
+				<td>Bianca@gmail.com</td>
+				<td>dev</td>
+				<td>Usuário</td>
+				<td>
+					<a> <img role="button" class="mini-icons" src="~/images/pencil.svg" /> </a>
+				</td>
+				<td>
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td>Fulano</td>
+				<td>Fulano@gmail.com</td>
+				<td>RH</td>
+				<td>Admin</td>
+				<td>
+					<img role="button" class="mini-icons" src="~/images/pencil.svg" />
+				</td>
+				<td>
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+	<a class="btn btn-primary" role="button">
+		Add Employee
+	</a>
+</div>

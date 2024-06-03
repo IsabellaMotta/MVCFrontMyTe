@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Location List";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/GerenciarUsuarios.css">
+    <link rel="stylesheet" href="~/css/EditingWBS.css">
+</head>
+
+<body>
+    <div class="container-conteudo">
+
+        <h2 class="work-sans">Location List</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Location name</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>São Paulo</td>
+                    <td>SP</td>
+                    <td>
+                        <a href="#" class="editLocationLink"><img role="button" class="mini-icons" src="~/images/pencil.svg" /></a>
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked1"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Recife</td>
+                    <td>RE</td>
+                    <td>
+                        <a href="#" class="editLocationLink"><img role="button" class="mini-icons" src="~/images/pencil.svg" /></a>
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked2" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked2"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Porto Alegre</td>
+                    <td>PA</td>
+                    <td>
+                        <a href="#" class="editLocationLink"><img role="button" class="mini-icons" src="~/images/pencil.svg" /></a>
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked3" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked3"></label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="btn-position">
+        <button>Add New Location</button>
+    </div>
+
+    <!-- Modal de edição do Location -->
+    <div class="modal fade" id="editLocationModal" tabindex="-1" aria-labelledby="editLocationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="work-sans-modal" id="editLocationModalLabel">Editing Location</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulário de edição de localização -->
+                    <div class="form-container">
+                        <div class="input-field">
+                            <label for="locationName">Location name:</label>
+                            <input type="text" id="locationName" class="form-control" placeholder="Enter location name">
+                        </div>
+                        <div class="input-field">
+                            <label for="locationCode">Code:</label>
+                            <input type="text" id="locationCode" class="form-control" placeholder="Enter location code">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Remover a borda de foco azul do botão de fechar do modal */
+        .btn-close:focus {
+            outline: none;
+        }
+    </style>
+
+    <script>
+        // Adiciona um manipulador de evento de clique aos ícones de lápis
+        document.querySelectorAll('.editLocationLink').forEach(item => {
+            item.addEventListener('click', function (event) {
+                // Impedir o comportamento padrão do link
+                event.preventDefault();
+
+                // Obter o modal de edição do Location pelo ID
+                var modal = document.getElementById('editLocationModal');
+
+                // Abrir o modal
+                var modalInstance = new bootstrap.Modal(modal);
+                modalInstance.show();
+            });
+        });
+    </script>
+</body>
+
+</html>

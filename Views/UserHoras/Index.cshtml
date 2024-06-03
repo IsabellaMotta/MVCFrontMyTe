@@ -1,0 +1,208 @@
+﻿@{
+    ViewData["Title"] = "TimeSheet";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeSheet</title>
+    <link rel="stylesheet" href="~/css/HorasIndex.css">
+</head>
+<body>
+    <div class="container-quinzena">
+        <input type="date" id="datePicker" />
+        <button id="prevQuinzena">&lt;</button>
+        <button id="nextQuinzena">&gt;</button>
+    </div>
+    <div>
+        <h1 class="work-sans">TimeSheet <img src="~/images/calendar-clock.svg" class="calendar-icon" /></h1>
+    </div>
+
+    <table class="table caption-top">
+        <thead>
+            <tr>
+                <th scope="col">WBS</th>
+            </tr>
+        </thead>
+        <tbody id="timesheetBody">
+            <tr>
+                <th scope="row">A301015</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const datePicker = document.getElementById('datePicker'); // entrada de data
+        const prevQuinzena = document.getElementById('prevQuinzena'); // quinzena anterior
+        const nextQuinzena = document.getElementById('nextQuinzena'); // proxima quinzena
+        const timesheetBody = document.getElementById('timesheetBody'); // corpo da tabela
+
+        let currentQuinzenaIndex = 0;
+
+        function calculateQuinzena(index) {
+            const startYear = 2024;
+            const baseDate = new Date(startYear, 0, 1);
+
+            // Cálculo quinzena
+            const isFirstHalf = index % 2 === 0;
+            const monthIndex = Math.floor(index / 2);
+            const monthStartDate = new Date(baseDate.getFullYear(), monthIndex, 1);
+
+            const quinStartDate = isFirstHalf
+                ? monthStartDate
+                : new Date(monthStartDate.getFullYear(), monthStartDate.getMonth(), 16);
+
+            const quinEndDate = isFirstHalf
+                ? new Date(quinStartDate.getFullYear(), quinStartDate.getMonth(), 15)
+                : new Date(quinStartDate.getFullYear(), quinStartDate.getMonth() + 1, 0);
+
+            return {
+                start: quinStartDate,
+                end: quinEndDate
+            };
+        }
+
+
+        // pegando quinzena atual usando new Date
+        function getCurrentQuinzenaIndex() {
+            const today = new Date();
+            const startYear = 2024;
+            const baseDate = new Date(startYear, 0, 1);
+            const currentMonth = today.getMonth();
+            const currentDay = today.getDate();
+
+            const monthIndex = currentMonth * 2 + (currentDay <= 15 ? 0 : 1);
+            return monthIndex;
+        }
+
+        // criação tabela
+        function updateTable() {
+            const quinzena = calculateQuinzena(currentQuinzenaIndex);
+            const startDate = quinzena.start;
+            const endDate = quinzena.end;
+
+            const headerRow = document.querySelector('table thead tr');
+            headerRow.innerHTML = '<th scope="col">WBS</th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const th = document.createElement('th');
+                th.scope = 'col';
+                th.innerText = date.getDate();
+                headerRow.appendChild(th);
+            }
+
+            timesheetBody.innerHTML = '';
+            const exampleRow = document.createElement('tr');
+            exampleRow.innerHTML = '<th scope="row">A301015</th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = '...';
+                exampleRow.appendChild(td);
+            }
+            timesheetBody.appendChild(exampleRow);
+
+            const newRow1 = document.createElement('tr');
+            newRow1.innerHTML = '<th scope="row"></th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = '...';
+                newRow1.appendChild(td);
+            }
+            timesheetBody.appendChild(newRow1);
+
+            const newRow2 = document.createElement('tr');
+            newRow2.innerHTML = '<th scope="row"></th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = '...';
+                newRow2.appendChild(td);
+            }
+            timesheetBody.appendChild(newRow2);
+
+            const TotalHours = document.createElement('tr');
+            TotalHours.innerHTML = '<th scope="row"> Total Hours</th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = ' ';
+                TotalHours.appendChild(td);
+            }
+            timesheetBody.appendChild(TotalHours);
+
+            const DailyOvertime = document.createElement('tr');
+            DailyOvertime.innerHTML = '<th scope="row">Daily overtime</th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = '...';
+                DailyOvertime.appendChild(td);
+            }
+            timesheetBody.appendChild(DailyOvertime);
+
+            const NightOvertime = document.createElement('tr');
+            NightOvertime.innerHTML = '<th scope="row">Night overtime</th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = '...';
+                NightOvertime.appendChild(td);
+            }
+            timesheetBody.appendChild(NightOvertime);
+
+            const PublicHoliday = document.createElement('tr');
+            PublicHoliday.innerHTML = '<th scope="row">Public Holiday</th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = '...';
+                PublicHoliday.appendChild(td);
+            }
+            timesheetBody.appendChild(PublicHoliday);
+
+            const BankOtTaken = document.createElement('tr');
+            BankOtTaken.innerHTML = '<th scope="row">Bank OT taken</th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = '...';
+                BankOtTaken.appendChild(td);
+            }
+            timesheetBody.appendChild(BankOtTaken);
+
+            const PerDiem = document.createElement('tr');
+            PerDiem.innerHTML = '<th scope="row">Per Diem hours</th>';
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                const td = document.createElement('td');
+                td.innerText = '...';
+                PerDiem.appendChild(td);
+            }
+            timesheetBody.appendChild(BankOtTaken);
+
+            // Add colunas
+        }
+
+        // botões e calendário quinzena set, +1 e -1
+        function setQuinzenaIndex(index) {
+            currentQuinzenaIndex = index;
+            updateTable();
+        }
+
+        prevQuinzena.addEventListener('click', () => {
+            setQuinzenaIndex(currentQuinzenaIndex - 1);
+        });
+
+        nextQuinzena.addEventListener('click', () => {
+            setQuinzenaIndex(currentQuinzenaIndex + 1);
+        });
+
+        datePicker.addEventListener('change', (e) => {
+            const selectedDate = new Date(e.target.value);
+            const currentMonth = selectedDate.getMonth();
+            const currentDay = selectedDate.getDate();
+
+            const newIndex = currentMonth * 2 + (currentDay <= 15 ? 0 : 1);
+            setQuinzenaIndex(newIndex);
+        });
+
+        // Inicializando
+        currentQuinzenaIndex = getCurrentQuinzenaIndex();
+        updateTable();
+    </script>
+</body>
+</html>
