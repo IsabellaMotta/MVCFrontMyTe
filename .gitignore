@@ -1,9 +1,7 @@
-###################
-# compiled source #
-###################
 *.com
 *.class
 *.dll
+*.vs
 *.exe
 *.pdb
 *.dll.config
